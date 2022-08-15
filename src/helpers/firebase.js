@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import {getDatabase, onValue, push, ref, remove, set, update} from "firebase/database"
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { toastErrorNotify, toastSuccessNotify } from "../helpers/toastNotify";
+import { toastErrorNotify, toastSuccessNotify } from "./ToastNotify";
 import { useEffect, useState } from "react";
 
 const firebaseConfig = {
@@ -25,9 +25,9 @@ export const createUser= async(email,password,navigate,displayName)=>{
         let userCredential=await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(auth.currentUser,{
             displayName: displayName
-        })
-        toastSuccessNotify("Başarıyla kaydedildi!")       
-        navigate("/")
+        });       
+        toastSuccessNotify("Başarıyla kaydedildi!");
+        navigate("/");
     }
     catch(error){
         toastErrorNotify(error.message);
@@ -40,8 +40,8 @@ export const signIn = async(email,password,navigate)=>{
     
     try{
         let userCredential=await signInWithEmailAndPassword(auth, email, password)
-        navigate("/")      
-        toastSuccessNotify("Başarıyla oturum açıldı!")
+        navigate("/");      
+        toastSuccessNotify("Başarıyla oturum açıldı!");
       }catch(error){
         toastErrorNotify(error.message);
       }
@@ -61,8 +61,8 @@ export const userObserver = (setCurrentUser)=>{
 //çıkış yapmak için
 export const logout = (bloglist)=>{
     signOut(auth)
-    toastSuccessNotify("Oturum başarıyla kapatıldı!")
-    bloglist.map((item)=>updateColor(item))
+    toastSuccessNotify("Oturum başarıyla kapatıldı!");
+    bloglist.map((item)=>updateColor(item));
 }
 
 const updateColor = (blog)=>{
@@ -79,8 +79,8 @@ export const signUpProvider = (navigate)=>{
 signInWithPopup(auth, provider)
   .then((result) => {
     console.log(result);
-    toastSuccessNotify("Başarıyla oturum açıldı!")
-    navigate("/")
+    toastSuccessNotify("Başarıyla oturum açıldı!");
+    navigate("/");
   }).catch((error) => {
     toastErrorNotify(error.message);
   });
@@ -131,7 +131,7 @@ export const deleteBlog = (id)=>{
   const db = getDatabase(app);
   const blogRef=ref(db,"blogs/");
   remove(ref(db,"blogs/"+id))
-  toastSuccessNotify("Kayıt Başarıyla silindi!")
+  toastSuccessNotify("Kayıt Başarıyla silindi!");
 }
 
 //Düzenle
@@ -139,6 +139,6 @@ export const updateBlog=(blog)=>{
   const db = getDatabase(app);
   const updates={}
   updates["blogs/"+blog.id]=blog
-  toastSuccessNotify("Kayıt Başarıyla Güncellendi!")
+  toastSuccessNotify("Kayıt Başarıyla Güncellendi!");
   return update(ref(db),updates)
 }

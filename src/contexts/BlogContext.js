@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 import { db} from "../helpers/firebase";
-import { toastErrorNotify } from "../helpers/toastNotify";
+import { toastErrorNotify } from "../helpers/ToastNotify";
 import { AuthContext } from "./AuthContext";
 
 export const BlogContext = createContext();
@@ -51,7 +51,7 @@ const BlogContextProvider = ({ children }) => {
       }
     }
     else{
-      toastErrorNotify("Lütfen önce giriş yapınız!")
+      toastErrorNotify("Lütfen önce giriş yapınız!");
     }      
       }    
 
