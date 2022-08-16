@@ -1,11 +1,6 @@
 {
   "name": "react-fireblog-milestone",
-  "version": "0.1.0",
-  "engines": {
-   "node": "16.16.0",
-   "npm": "8.5.5",
-   "yarn": "1.22.10"
-  },
+  "version": "0.1.0", 
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
